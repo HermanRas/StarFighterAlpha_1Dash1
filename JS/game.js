@@ -35,14 +35,22 @@ function stillKeyDown() {
     if (keyIsDown(DOWN_ARROW)) {
         myJet.move(0, 1);
     }
+    // http://keycode.info/
+    // if (keyIsDown(32)) {
+    //     myJet.shoot(myAmmo);
+    // }
 }
 
+function keyPressed() {
+    if (key === ' ') {
+        myJet.shoot(myAmmo);
+    }
+}
 
 function draw() {
     stillKeyDown();
     background(0);
     gameBg.show();
     myJet.show();
-
-    //console.log(mouseY);
+    myJet.projectilesUpdate();
 }
