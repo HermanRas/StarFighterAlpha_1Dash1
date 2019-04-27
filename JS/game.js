@@ -27,6 +27,7 @@ function setup() {
     myAmmo = new ammo_lv1();
     myBomb = new bomb_lv1();
     myJet = new jet_lv1();
+    myScore = new score();
 }
 
 function stillKeyDown() {
@@ -60,6 +61,7 @@ function keyPressed() {
 function draw() {
     stillKeyDown();
     background(0);
+    myScore.show();
     gameBg.show();
     myJet.show();
     myJet.projectilesUpdate();
