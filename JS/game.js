@@ -1,6 +1,11 @@
+//vet global vars
+$health = 100;
+$lives = 3;
+$boms = 0;
 
 //set all ammo models
 let img_ammo_lv1;
+let img_bomb_lv1;
 //set all Jet models
 let img_jet_lv1;
 
