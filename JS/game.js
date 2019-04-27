@@ -1,7 +1,7 @@
 //vet global vars
-$health = 100;
-$lives = 3;
-$boms = 0;
+health = 100;
+lives = 3;
+bombs = 1;
 
 //set all ammo models
 let img_ammo_lv1;
@@ -54,7 +54,10 @@ function keyPressed() {
         myJet.shoot(myAmmo);
 
     } else if (key === 'b') {
-        myJet.shoot(myBomb);
+        if (bombs >= 1) {
+            myJet.shoot(myBomb);
+            bombs--;
+        }
     }
 }
 

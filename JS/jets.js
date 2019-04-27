@@ -31,7 +31,7 @@ class jet_lv1 {
     show() {
         //add projectiles
         for (let i = 0; i < this.projectiles.length; i++) {
-            image(this.projectiles[i][0], this.projectiles[i][1], this.projectiles[i][2], this.projectiles[i][3], this.projectiles[i][4]);
+            image(this.projectiles[i][0].imgModel, this.projectiles[i][1], this.projectiles[i][2], this.projectiles[i][0].size.y, this.projectiles[i][0].size.x);
         }
 
         //add jet
@@ -41,14 +41,17 @@ class jet_lv1 {
 
     shoot(ammo) {
         //                                  image,     SW,     SH,          IW,          IH
-        this.projectiles.push([ammo.imgModel, this.location.x + (this.size.x * 0.5), this.location.y + (this.size.y * 0.5), ammo.size.y, ammo.size.x, ammo.speed]);
+        this.projectiles.push([ammo, this.location.x + (this.size.x * 0.5), this.location.y + (this.size.y * 0.5)]);
     }
 
     projectilesUpdate() {
         for (let i = 0; i < this.projectiles.length; i++) {
-            this.projectiles[i][1] += this.projectiles[i][5];
+            this.projectiles[i][1] += this.projectiles[i][0].speed;
             if (this.projectiles[i][1] > screenWidth) {
                 this.projectiles.splice(i, 1);
+            } else if (this.projectiles[i][0].type === 'bomb' && this.projectiles[i][1] > (screenWidth - floor(screenWidth * 0.35))) {
+                this.projectiles.splice(i, 1);
+                console.log('big boom');
             }
         }
     }
