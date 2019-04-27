@@ -30,7 +30,7 @@ function setup() {
     myBomb = new bomb_lv1();
     myJet = new jet_lv1();
     myScore = new score();
-    ufo = new ufo_lv1();
+    ufos = new ufos({ level: 1 }, { enemyCount: 5 });
 }
 
 function stillKeyDown() {
@@ -71,5 +71,5 @@ function draw() {
     gameBg.show();
     myJet.show();
     myJet.projectilesUpdate();
-    ufo.show();
+    ufos.update();
 }

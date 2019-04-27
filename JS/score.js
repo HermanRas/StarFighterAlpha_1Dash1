@@ -19,4 +19,8 @@ class score {
         text('Bomb : ' + bombs, this.location.x, (screenHeight) - this.size.y, this.size.x, this.size.y);
     }
 
+    addScore(points) {
+        this.currentScore += points;
+    }
+
 }

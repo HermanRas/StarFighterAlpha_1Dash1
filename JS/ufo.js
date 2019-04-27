@@ -5,20 +5,13 @@ class ufo_lv1 {
         this.speed = 3;
         this.imgModel = img_ufo_lv1;
         this.size = createVector(66, 65);
-        this.location = createVector(screenWidth - 10, floor((screenHeight - this.size.y) * 0.5));
+        this.location = createVector(screenWidth + random(screenWidth), random(floor((screenHeight - this.size.y))));
         this.projectiles = [];
+        this.hitScore = 2;
     }
 
     move() {
-        //this.location.x += x * this.speed;
-        this.location.y -= this.speed;
-        //FIX MAX WIDTH
-        if (this.location.x < 0) {
-            this.location.x = 0;
-        }
-        if (this.location.x > screenWidth - this.size.x) {
-            this.location.x = screenWidth - this.size.x;
-        }
+        this.location.x -= this.speed;
         //FIX MAX HIGHT
         if (this.location.y < 0) {
             this.location.y = 0;
@@ -51,6 +44,58 @@ class ufo_lv1 {
                 this.projectiles.splice(i, 1);
             }
         }
+    }
+
+}
+
+class ufos {
+
+    constructor({ level }, { enemyCount }) {
+        //set ufos vars
+        this.enemyCount = enemyCount;
+        this.planes = [];
+    }
+
+    update() {
+        if (this.planes.length < this.enemyCount) {
+            this.planes.push(new ufo_lv1());
+        }
+        for (let i = 0; i < this.planes.length; i++) {
+            let updatePlane = true;
+            if (this.planes[i].location.x < 0) {
+                this.planes.splice(i, 1);
+                updatePlane = false;
+            } else {
+                for (let n = 0; n < myJet.projectiles.length; n++) {
+                    let bullet = myJet.projectiles[n];
+                    let activeUfo = this.planes[i];
+
+                    if (bullet[1] > activeUfo.location.x && bullet[1] < activeUfo.location.x + activeUfo.size.x && bullet[2] > activeUfo.location.y && bullet[2] < activeUfo.location.y + activeUfo.size.y) {
+                        this.planes.splice(i, 1);
+                        myJet.projectiles.splice(n, 1);
+                        updatePlane = false;
+                        myScore.addScore(activeUfo.hitScore);
+                        break;
+                    };
+                }
+            }
+
+            //if all check are good show plane
+            if (updatePlane) {
+                this.planes[i].move();
+                this.planes[i].show();
+            }
+        }
+    }
+
+    bigBoom() {
+        for (let i = 0; i < this.planes.length; i++) {
+            if (this.planes[i].location.x < screenWidth) {
+                myScore.addScore(this.planes[i].hitScore);
+            }
+        }
+
+        this.planes = [];
     }
 
 }

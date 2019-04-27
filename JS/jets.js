@@ -51,7 +51,7 @@ class jet_lv1 {
                 this.projectiles.splice(i, 1);
             } else if (this.projectiles[i][0].type === 'bomb' && this.projectiles[i][1] > (screenWidth - floor(screenWidth * 0.35))) {
                 this.projectiles.splice(i, 1);
-                console.log('big boom');
+                ufos.bigBoom();
             }
         }
     }
