@@ -13,6 +13,7 @@ let img_jet_lv1;
 function preload() {
     //load ammo
     img_ammo_lv1 = loadImage('IMG/Ammo_lv1.png');
+    img_bomb_lv1 = loadImage('IMG/Bomb_lv1.png');
     //load jets
     img_jet_lv1 = loadImage('IMG/Jet_lv1_.png');
 }
@@ -24,6 +25,7 @@ function setup() {
     createCanvas(screenWidth, screenHeight);
     gameBg = new space();
     myAmmo = new ammo_lv1();
+    myBomb = new bomb_lv1();
     myJet = new jet_lv1();
 }
 
@@ -49,6 +51,9 @@ function stillKeyDown() {
 function keyPressed() {
     if (key === ' ') {
         myJet.shoot(myAmmo);
+
+    } else if (key === 'b') {
+        myJet.shoot(myBomb);
     }
 }
 
