@@ -2,16 +2,16 @@ class ufo_lv1 {
 
     constructor() {
         //set ufo_lv1 vars
-        this.speed = 5;
-        this.imgModel = img_jet_lv1;
-        this.size = createVector(75, 65);
-        this.location = createVector(10, floor((screenHeight - this.size.y) * 0.5));
+        this.speed = 3;
+        this.imgModel = img_ufo_lv1;
+        this.size = createVector(66, 65);
+        this.location = createVector(screenWidth - 10, floor((screenHeight - this.size.y) * 0.5));
         this.projectiles = [];
     }
 
-    move(x, y) {
-        this.location.x += x * this.speed;
-        this.location.y += y * this.speed;
+    move() {
+        //this.location.x += x * this.speed;
+        this.location.y -= this.speed;
         //FIX MAX WIDTH
         if (this.location.x < 0) {
             this.location.x = 0;
@@ -49,9 +49,6 @@ class ufo_lv1 {
             this.projectiles[i][1] += this.projectiles[i][0].speed;
             if (this.projectiles[i][1] > screenWidth) {
                 this.projectiles.splice(i, 1);
-            } else if (this.projectiles[i][0].type === 'bomb' && this.projectiles[i][1] > (screenWidth - floor(screenWidth * 0.35))) {
-                this.projectiles.splice(i, 1);
-                console.log('big boom');
             }
         }
     }

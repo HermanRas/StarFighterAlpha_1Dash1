@@ -8,6 +8,7 @@ let img_ammo_lv1;
 let img_bomb_lv1;
 //set all Jet models
 let img_jet_lv1;
+let img_ufo_lv1;
 
 //load models
 function preload() {
@@ -16,6 +17,7 @@ function preload() {
     img_bomb_lv1 = loadImage('IMG/Bomb_lv1.png');
     //load jets
     img_jet_lv1 = loadImage('IMG/Jet_lv1_.png');
+    img_ufo_lv1 = loadImage('IMG/Ufo_lv1.png');
 }
 
 
@@ -28,6 +30,7 @@ function setup() {
     myBomb = new bomb_lv1();
     myJet = new jet_lv1();
     myScore = new score();
+    ufo = new ufo_lv1();
 }
 
 function stillKeyDown() {
@@ -68,4 +71,5 @@ function draw() {
     gameBg.show();
     myJet.show();
     myJet.projectilesUpdate();
+    ufo.show();
 }
