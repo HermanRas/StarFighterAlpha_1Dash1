@@ -19,6 +19,13 @@
 ### FrameWork 
  - [!["CSS 3"](https://img.shields.io/badge/CSS-3-blue.svg)](http://www.css3.info/)
 
+### To Do:
+ - jet & ufo colusion = insta death
+ - bullet -- health ... not insta death
+ - spawn counter per level to calculate boss fight
+ - boss health display right bottom
+ - drops.js for nukes and health and lives
+ - build menu
 
 ## Index
 # Controls
