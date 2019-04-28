@@ -31,7 +31,7 @@ class jet_lv1 {
     show() {
         //add projectiles
         for (let i = 0; i < this.projectiles.length; i++) {
-            image(this.projectiles[i][0].imgModel, this.projectiles[i][1], this.projectiles[i][2], this.projectiles[i][0].size.y, this.projectiles[i][0].size.x);
+            image(this.projectiles[i].imgModel, this.projectiles[i].location.x, this.projectiles[i].location.y, this.projectiles[i].size.y, this.projectiles[i].size.x);
         }
 
         //add jet
@@ -40,16 +40,17 @@ class jet_lv1 {
     }
 
     shoot(ammo) {
-        //                                  image,     SW,     SH,          IW,          IH
-        this.projectiles.push([ammo, this.location.x + (this.size.x * 0.5), this.location.y + (this.size.y * 0.5)]);
+        ammo.location.x = this.location.x + (this.size.x * 0.5);
+        ammo.location.y = this.location.y + (this.size.y * 0.5);
+        this.projectiles.push(ammo);
     }
 
     projectilesUpdate() {
         for (let i = 0; i < this.projectiles.length; i++) {
-            this.projectiles[i][1] += this.projectiles[i][0].speed;
-            if (this.projectiles[i][1] > screenWidth) {
+            this.projectiles[i].location.x += this.projectiles[i].speed;
+            if (this.projectiles[i].location.x > screenWidth) {
                 this.projectiles.splice(i, 1);
-            } else if (this.projectiles[i][0].type === 'bomb' && this.projectiles[i][1] > (screenWidth - floor(screenWidth * 0.35))) {
+            } else if (this.projectiles[i].type === 'bomb' && this.projectiles[i].location.x > (screenWidth - floor(screenWidth * 0.35))) {
                 this.projectiles.splice(i, 1);
                 ufos.bigBoom();
             }

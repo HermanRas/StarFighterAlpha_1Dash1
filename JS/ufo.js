@@ -70,7 +70,7 @@ class ufos {
                     let bullet = myJet.projectiles[n];
                     let activeUfo = this.planes[i];
 
-                    if (bullet[1] > activeUfo.location.x && bullet[1] < activeUfo.location.x + activeUfo.size.x && bullet[2] > activeUfo.location.y && bullet[2] < activeUfo.location.y + activeUfo.size.y) {
+                    if (bullet.location.x > activeUfo.location.x && bullet.location.x < activeUfo.location.x + activeUfo.size.x && bullet.location.y > activeUfo.location.y && bullet.location.y < activeUfo.location.y + activeUfo.size.y) {
                         this.planes.splice(i, 1);
                         myJet.projectiles.splice(n, 1);
                         updatePlane = false;
