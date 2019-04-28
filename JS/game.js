@@ -20,7 +20,6 @@ function preload() {
     img_ufo_lv1 = loadImage('IMG/Ufo_lv1.png');
 }
 
-
 function setup() {
     screenWidth = 1000;
     screenHeight = 600;
@@ -65,11 +64,21 @@ function keyPressed() {
 }
 
 function draw() {
-    stillKeyDown();
-    background(0);
-    myScore.show();
-    gameBg.show();
-    myJet.show();
-    myJet.projectilesUpdate();
-    ufos.update();
+    if (lives > 0) {
+        stillKeyDown();
+        background(0);
+        myScore.show();
+        gameBg.show();
+        myJet.show();
+        myJet.projectilesUpdate();
+        ufos.update();
+    } else {
+        background(0);
+        fill(0, 255, 0);
+        textSize(72);
+        text('Game Over !', screenWidth * 0.3 + 72, screenHeight * 0.5 - 150, screenWidth, 72);
+        fill(255, 0, 255);
+        textSize(48);
+        text('Score : ' + myScore.currentScore, screenWidth * 0.3 + 150, screenHeight * 0.5, screenWidth, 72);
+    }
 }

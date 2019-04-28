@@ -57,28 +57,46 @@ class ufos {
     }
 
     update() {
+        //check enemy counter
         if (this.planes.length < this.enemyCount) {
             this.planes.push(new ufo_lv1());
         }
+
+        //check ufo's for impact
         for (let i = 0; i < this.planes.length; i++) {
+            //local vars
+            let activeUfo = this.planes[i];
             let updatePlane = true;
+            //plane off screen delete
             if (this.planes[i].location.x < 0) {
                 this.planes.splice(i, 1);
                 updatePlane = false;
             } else {
                 for (let n = 0; n < myJet.projectiles.length; n++) {
+                    //local var
                     let bullet = myJet.projectiles[n];
-                    let activeUfo = this.planes[i];
 
+                    //check plane for bullet impact
                     if (bullet.location.x > activeUfo.location.x && bullet.location.x < activeUfo.location.x + activeUfo.size.x && bullet.location.y > activeUfo.location.y && bullet.location.y < activeUfo.location.y + activeUfo.size.y) {
-                        this.planes.splice(i, 1);
-                        myJet.projectiles.splice(n, 1);
-                        updatePlane = false;
-                        myScore.addScore(activeUfo.hitScore);
-                        break;
+                        if (bullet.type !== 'bomb') {
+                            this.planes.splice(i, 1);
+                            myJet.projectiles.splice(n, 1);
+                            updatePlane = false;
+                            myScore.addScore(activeUfo.hitScore);
+                            break;
+                        }
                     };
                 }
             }
+
+            if (myJet.location.x > activeUfo.location.x && myJet.location.x < activeUfo.location.x + activeUfo.size.x && myJet.location.y > activeUfo.location.y && myJet.location.y < activeUfo.location.y + activeUfo.size.y) {
+                myJet.location.x = 0;
+                myJet.location.y = 0;
+                lives--;
+                break;
+                updatePlane = false;
+            };
+
 
             //if all check are good show plane
             if (updatePlane) {
@@ -92,6 +110,7 @@ class ufos {
         for (let i = 0; i < this.planes.length; i++) {
             if (this.planes[i].location.x < screenWidth) {
                 myScore.addScore(this.planes[i].hitScore);
+                background(255);
             }
         }
 
